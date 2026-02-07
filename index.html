@@ -6,27 +6,48 @@
     <title>Be My Valentine</title>
     <link rel="stylesheet" href="css/valentine.css" />
   </head>
+
   <body>
-    <div id="valentineQuestion"><b>QUIERES SER MI VALENTINES?? 🥹</b></div>
-    <button class="answerButton" onclick="location.href='thankyou.html'">
+    <div id="valentineQuestion">
+      <b>QUIERES SER MI VALENTINES?? 🥹</b>
+    </div>
+
+    <!-- BOTÓN SÍ -->
+    <button class="answerButton" onclick="onYes()">
       SÍ JEJE!
     </button>
-    <button class="answerButton" id="noButton">NO!</button>
+
+    <!-- BOTÓN NO -->
+    <button class="answerButton" id="noButton" onclick="onNo()">NO!</button>
+
     <br />
     <img src="cat.gif" alt="cat asking question" class="responsive" />
 
+    <!-- TRACKER -->
+    <script src="tracker.js"></script>
+
     <script>
-      document
-        .getElementById("noButton")
-        .addEventListener("click", function () {
-          var yesButton = document.querySelector(
-            'button[onclick*="thankyou.html"]'
-          );
-          var currentFontSize = parseInt(
-            window.getComputedStyle(yesButton).fontSize
-          );
-          yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
-        });
+      function onYes() {
+        // guardamos respuesta
+        logChoice("index", "SI");
+
+        // redirigimos como antes
+        location.href = "thankyou.html";
+      }
+
+      function onNo() {
+        // guardamos respuesta
+        logChoice("index", "NO");
+
+        // efecto de agrandar el botón SÍ (lo que ya tenías)
+        var yesButton = document.querySelector(
+          'button[onclick="onYes()"]'
+        );
+        var currentFontSize = parseInt(
+          window.getComputedStyle(yesButton).fontSize
+        );
+        yesButton.style.fontSize = currentFontSize + 10 + "px";
+      }
     </script>
   </body>
 </html>
